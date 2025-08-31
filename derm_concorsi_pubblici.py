@@ -25,7 +25,7 @@ for attempt in range(n_attempts):
         with open('last_concorsi.json', 'r', encoding='utf-8') as f:
             last_concorsi = json.load(f)["ids"]
 
-        if all_concorsi:
+        if all_concorsi[:20]:
             
             ids = []
             for concorso in all_concorsi:
