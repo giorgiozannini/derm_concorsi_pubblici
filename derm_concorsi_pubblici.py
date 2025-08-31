@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 import json
 import os 
 import time
-# Sample HTML (you should replace this with the actual HTML string)
 
 n_attempts = 3
 for attempt in range(n_attempts):
@@ -24,8 +23,8 @@ for attempt in range(n_attempts):
 
         with open('last_concorsi.json', 'r', encoding='utf-8') as f:
             last_concorsi = json.load(f)["ids"]
-
-        if all_concorsi[:20]:
+        c = 0
+        if all_concorsi:
             
             ids = []
             for concorso in all_concorsi:
@@ -34,6 +33,9 @@ for attempt in range(n_attempts):
 
                 # Extract 'ente'
                 ente = concorso.select_one("div.col-md-6 div.field__item")
+                c+=1
+                if c == 20:
+                    break
 
                 if ente and id not in last_concorsi:
                 
@@ -72,6 +74,7 @@ for attempt in range(n_attempts):
 
             with open('last_concorsi.json', 'w', encoding='utf-8') as f:
                 json.dump({"ids": ids}, f, indent=2, ensure_ascii=False)
+                
 
     except Exception as e:
         print(e)
