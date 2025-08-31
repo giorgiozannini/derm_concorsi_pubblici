@@ -23,7 +23,7 @@ for attempt in range(n_attempts):
 
         with open('last_concorsi.json', 'r', encoding='utf-8') as f:
             last_concorsi = json.load(f)["ids"]
-        c = 0
+
         if all_concorsi:
             
             ids = []
@@ -33,9 +33,6 @@ for attempt in range(n_attempts):
 
                 # Extract 'ente'
                 ente = concorso.select_one("div.col-md-6 div.field__item")
-                c+=1
-                if c == 20:
-                    break
 
                 if ente and id not in last_concorsi:
                 
