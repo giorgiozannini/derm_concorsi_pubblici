@@ -1,0 +1,42 @@
+name: Run Daily Python Script
+
+on:
+  schedule:
+    - cron: '0 16 * * *'  # Every day at 17:00 UTC
+  workflow_dispatch:      # Optional: allows manual triggering
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run script
+        run: python derm_concorsi_pubblici.py
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+
+      - name: Commit and push state file
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add last_concorsi.json
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update last concorsi state [skip ci]"
+            git push
+            echo "State file updated and committed"
+          fi
