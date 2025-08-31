@@ -10,7 +10,7 @@ for attempt in range(n_attempts):
     print("Attempt n. ", attempt+1)
 
     try:
-        url = "https://www.concorsipubblici.com/search?keys=neuropsichiatria+infantile"
+        url = "https://www.concorsipubblici.com/search?keys=dermatologia"
         page = requests.get(url)
         
         print("Response:", page.status_code)
@@ -51,7 +51,7 @@ for attempt in range(n_attempts):
                     ente_link = f"<a href='{ente_link}'>pagina ente</a>" if ente_link else "Pagina ente non trovata"
 
                     message = f"""
-<b>Nuovo concorso pubblico NPI!</b>
+<b>Nuovo concorso di Dermatologia!!</b>
 
 > <b>pagina</b>: {concorsi_url}
 > <b>ente</b>: {ente_name}
