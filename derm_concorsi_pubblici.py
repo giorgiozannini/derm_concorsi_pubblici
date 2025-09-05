@@ -28,7 +28,7 @@ for attempt in range(n_attempts):
             
             ids = []
             for concorso in all_concorsi:
-
+                
                 id = str(concorso.find("article").get("data-history-node-id"))
 
                 # Extract 'ente'
@@ -45,6 +45,9 @@ for attempt in range(n_attempts):
 
                     # Extract 'description'
                     description = concorso.select_one("div.contest-footer").get_text().strip().replace("\n", "")
+
+                    #if not 'derm' in description:
+                    #    continue
 
                     concorsi_url = f"<a href='{url}'>pagina concorsi</a>"
                     ente_link = f"<a href='{ente_link}'>pagina ente</a>" if ente_link else "Pagina ente non trovata"
