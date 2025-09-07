@@ -46,8 +46,8 @@ for attempt in range(n_attempts):
                     # Extract 'description'
                     description = concorso.select_one("div.contest-footer").get_text().strip().replace("\n", "")
 
-                    #if not 'derm' in description:
-                    #    continue
+                    if not 'derm' in description:
+                        continue
 
                     concorsi_url = f"<a href='{url}'>pagina concorsi</a>"
                     ente_link = f"<a href='{ente_link}'>pagina ente</a>" if ente_link else "Pagina ente non trovata"
